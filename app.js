@@ -15,6 +15,10 @@ app.set('view engine', 'jade');
 
 app.use(favicon());
 app.use(logger('dev'));
+
+var contentTypeOverride = require('utils/contentTypeOverride');
+app.use( contentTypeOverride.overrideContentType() );
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
