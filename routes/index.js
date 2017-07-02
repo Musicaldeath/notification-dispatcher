@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
 router.post('/', ( req, res ) => {
   console.log( req.headers );
   console.log( req.body );
+  console.log( req.SubscribeURL );
 });
 
 module.exports = router;
