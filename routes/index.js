@@ -8,8 +8,7 @@ router.get('/', function(req, res) {
 
 router.post('/', ( req, res ) => {
   console.log( req.headers );
-  console.log( req.header );
-  console.log( req["x-amz-sns-message-type"] );
+  console.log( req.body );
 });
 
 module.exports = router;
