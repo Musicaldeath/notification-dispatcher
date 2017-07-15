@@ -2,8 +2,18 @@
   <head>
     <meta charset="utf-8" />
     <title>Error</title>
+
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     Yo bud bud on ne render aucuns fichier a partir de ce serveur. :p
+
+    <script>
+      var socket = io('http://localhost');
+      socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
+    </script>
   </body>
 </html>

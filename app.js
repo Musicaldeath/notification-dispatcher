@@ -17,7 +17,9 @@ app.use( contentTypeOverride.overrideContentType() );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 //ROUTING MODULES
 app.use('/', index);

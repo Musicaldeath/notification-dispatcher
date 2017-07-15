@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var router = express.Router();
 
 const PATH = require('path');
@@ -10,7 +11,21 @@ router.use( ( req, res, next ) => {
   next();
 });
 
-router.post('/:namespace', ( req, res ) => {
+router.get('/', function( req, res) {
+  res.render("index");
+});
+
+router.post('/subscriptions',( req, res, next ) {
+  console.log( req );
+  res.end();
+});
+
+router.get('/subscriptions',( req, res, next ) {
+  console.log( req );
+  res.end();
+});
+
+/*router.post('/:namespace', ( req, res ) => {
 
   if(( req && req.params && req.params.namespace ) || ( !req.headers['x-amz-sns-message-type'] ))
     res.status( 400 );
@@ -18,9 +33,9 @@ router.post('/:namespace', ( req, res ) => {
   notificationController.setTopic( req.params.namespace );
 
   //notificationController.actOnType( req.headers[x-amz-sns-message-type], ( result ) => {
-    res.end();
+  res.end();
   //});
 
-});
+});*/
 
 module.exports = router;
