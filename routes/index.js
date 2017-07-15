@@ -3,13 +3,13 @@ var app = express();
 var router = express.Router();
 
 const PATH = require('path');
-const NotificationController = require( PATH.join( __dirname , '../app/controllers/NotificationController' ) );
-let notificationController = new NotificationController( 3005 );
+//const NotificationController = require( PATH.join( __dirname , '../app/controllers/NotificationController' ) );
+//let notificationController = new NotificationController( 3005 );
 
-router.use( ( req, res, next ) => {
+/*router.use( ( req, res, next ) => {
   notificationController.setRequest( req );
   next();
-});
+});*/
 
 router.get('/', function( req, res) {
   res.render("index");
