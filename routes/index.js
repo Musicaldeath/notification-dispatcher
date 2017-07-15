@@ -15,12 +15,12 @@ router.get('/', function( req, res) {
   res.render("index");
 });
 
-router.post('/subscriptions',( req, res, next ) {
+router.post('/subscriptions',( req, res, next ) => {
   console.log( req );
   res.end();
 });
 
-router.get('/subscriptions',( req, res, next ) {
+router.get('/subscriptions',( req, res, next ) => {
   console.log( req );
   res.end();
 });
