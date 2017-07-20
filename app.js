@@ -11,10 +11,6 @@ var app = express();
 var server = require('http').createServer( app );
 var io = require('socket.io')( server );
 
-server.listen( 3006 , () => {
-  console.log( "SERVER STARTED ON 3006");
-});
-
 io.on('connection', () => {
   console.log( "CONNECTED !");
 });
@@ -25,5 +21,9 @@ app.use( function( req, res, next ) {
 });
 app.use( '/', require('./routes/index' ) );
 app.use( express.static( __dirname + '/public' ));
+
+server.listen( 3006 , () => {
+  console.log( "SERVER STARTED ON 3006");
+});
 
 module.exports = app;
