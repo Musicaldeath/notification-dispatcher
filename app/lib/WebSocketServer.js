@@ -1,18 +1,15 @@
 var socketIo = require('socket.io');
 
 /*****************************************************/
-let registerEvent = ( socket, eventName, fn ) => {
+var registerEvent = ( socket, eventName, fn ) => {
   socket.on( eventName, fn );
 };
 
-let getConnection = ( videoId, array ) => {
+var getConnection = ( videoId, array ) => {
   array.forEach( ( conn ) => {
     if( conn.videoId === video ) return conn;
   });
 };
-/*****************************************************/
-            //******-----CLASS-----******//
-/*****************************************************/
 
 class WebSocketServer {
 
@@ -21,7 +18,6 @@ class WebSocketServer {
       this.io = {};
   }
 
-  /*****************************************************/
   init( server ) {
     this.io = socketIo( server );
     this.io.on('connection', ( socket ) => {
@@ -34,7 +30,6 @@ class WebSocketServer {
     return server;
   }
 
-  /*****************************************************/
   subscribeFn( data ) {
     var conn = getConnection( data.videoId, this.connections );
     if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
@@ -53,7 +48,7 @@ class WebSocketServer {
     conn.sockets.splice( socket, 1 );
     console.log( data );
   }
-  /*****************************************************/
+
   pushMessage( videoId, msg ) {
     this.connections.forEach( ( conn ) => {
       if( conn.videoId === videoId ) {
@@ -63,8 +58,6 @@ class WebSocketServer {
       }
     });
   }
-  /*****************************************************/
-  /*****************************************************/
 
 };
 /****************    END CLASS   ***********************/
