@@ -1,41 +1,25 @@
+const SocketHandler    = require('./../app/lib/SocketHandler');
+const PubSubController = require('./../app/lib/PubSubController');
+
 var express = require('express');
-var app = express();
-var router = express.Router();
+var app     = express();
+var router  = express.Router();
+var socketHandler = new SocketHandler();
 
-const PATH = require('path');
-//const NotificationController = require( PATH.join( __dirname , '../app/controllers/NotificationController' ) );
-//let notificationController = new NotificationController( 3005 );
+router.post('/',( req, res, next ) => {
 
-/*router.use( ( req, res, next ) => {
-  notificationController.setRequest( req );
-  next();
-});*/
+  var pubSubController = new PubSubController( socketHandler );
+  var msgType = req.headers['x-amz-sns-message-type'] ;
 
-router.get('/', function( req, res) {
-  res.render("index");
-});
+  switch( msgType ) {
+    case 'SubscriptionConfirmation' :  pubSubController.confirmSubscription( req.body.SubscribeURL ); break;
+    case 'Notification' : pubSubController.notify( new AmazonSNSNotification( req ) ) break;
+    default: res.status( 400 ).send( { err: 'Unsupported method' } );
+  }
 
-router.post('/subscriptions',( req, res, next ) => {
+
   console.log( req );
   res.end();
 });
-
-router.get('/subscriptions',( req, res, next ) => {
-  console.log( req );
-  res.end();
-});
-
-/*router.post('/:namespace', ( req, res ) => {
-
-  if(( req && req.params && req.params.namespace ) || ( !req.headers['x-amz-sns-message-type'] ))
-    res.status( 400 );
-
-  notificationController.setTopic( req.params.namespace );
-
-  //notificationController.actOnType( req.headers[x-amz-sns-message-type], ( result ) => {
-  res.end();
-  //});
-
-});*/
 
 module.exports = router;
