@@ -10,11 +10,6 @@ var app = express();
 
 
 var server = require('http').createServer( app );
-app.all('/', function( req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
 
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
@@ -25,11 +20,8 @@ app.use( contentTypeOverride.overrideContentType() );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.get('/', function(req, res, next) {
-  res.end();
-});
-app.use(express.static(__dirname + '/public'));
 
+app.use(express.static(__dirname + '/public'));
 
 
 var io = require('socket.io').listen(server);       // logging
