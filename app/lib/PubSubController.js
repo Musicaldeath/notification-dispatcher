@@ -7,6 +7,10 @@ class PubSubController {
      this.webSocketServer = webSocketServer;
    }
 
+   init( server ) {
+     this.webSocketServer.init( server );
+   }
+
    confirmSubscription( subscribeURL ) {
      var request = http.get( subscribeURL );
      request.on('error', ( err ) => { console.error( err ); } );

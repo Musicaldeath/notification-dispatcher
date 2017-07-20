@@ -5,8 +5,8 @@ var registerEvent = ( socket, eventName, fn ) => {
   socket.on( eventName, fn );
 };
 
-var getConnection = ( videoId, array ) => {
-  array.forEach( ( conn ) => {
+var getConnection = ( videoId, arr ) => {
+  arr.forEach( ( conn ) => {
     if( conn.videoId === video ) return conn;
   });
 };
@@ -26,8 +26,6 @@ class WebSocketServer {
       registerEvent( socket, 'Unsubscribe', this.unsubscribeFn );
 
     });
-
-    return server;
   }
 
   subscribeFn( data ) {

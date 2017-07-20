@@ -15,8 +15,11 @@ app.use( function( req, res, next ) {
   next();
 });
 //require('./app/utils/websockstart').init();
-var ioContainer = new ( require('./app/lib/WebSocketServer'))()
-                    .init( server ) ;
+var PubSubController = require( './app/lib/pubSubController');
+var WebSocketServer = require( './app/lib/WebSocketServer');
+var pubSub = new PubSubController( new WebSocketServer() )
+                    .init( server );
+
 
 app.use( '/', require('./routes/index' ) );
 
