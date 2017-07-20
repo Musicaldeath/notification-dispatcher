@@ -37,7 +37,7 @@ class WebSocketServer {
         if( conn.sockets[this] === undefined )
           conn.sockets.push( this );
       }
-      console.log( data );
+      console.log( connections, '  ', data );
     };
   }
 
@@ -50,7 +50,7 @@ class WebSocketServer {
       else {
         conn.sockets.splice( sock, 1 );
       }
-      console.log( data );
+      console.log( connections, '  ', data  );
     };
   }
 
