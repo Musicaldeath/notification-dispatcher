@@ -8,13 +8,13 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-app.all('/', function( req, res, next) {
+
+var server = require('http').createServer( app );
+server.all('/', function( req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
-var server = require('http').createServer( app );
-
 var io = require('socket.io').listen(server);       // logging
   io.set('transports', [            // all transports (optional if you want flashsocket)
       'websocket'
