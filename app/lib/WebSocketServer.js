@@ -1,13 +1,11 @@
 var socketIo = require('socket.io');
 
-
 /*****************************************************/
-
-
 let registerEvent = ( socket, eventName, fn ) => {
   socket.on( eventName, fn );
 };
 
+/*****************************************************/
             //******-----CLASS-----******//
 /*****************************************************/
 
@@ -33,7 +31,7 @@ class WebSocketServer {
 
   /*****************************************************/
   subscribeFn( data ) {
-    var conn = getConnection( data.videoId );
+    var conn = this.getConnection( data.videoId );
     if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
     else {
       if( conn.sockets[socket] !== undefined )
@@ -43,7 +41,7 @@ class WebSocketServer {
   }
 
   unsubscribeFn( data ) {
-    var conn = getConnection( data.videoId );
+    var conn = this.getConnection( data.videoId );
     if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
     if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
 
