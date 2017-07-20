@@ -27,12 +27,6 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
 
-var io = require('socket.io').listen(server);       // logging
-
-
-io.on('connection', function(socket) {
-  console.log( 'AAAAAH');
-});
 //ROUTING MODULES
 //app.use('/', index);
 
