@@ -16,7 +16,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(favicon());
 app.use(logger('dev'));
-app.use( contentTypeOverride.overrideContentType() );
+//app.use( contentTypeOverride.overrideContentType() );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
