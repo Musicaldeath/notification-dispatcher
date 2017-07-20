@@ -33,7 +33,7 @@ class WebSocketServer {
     console.log( this.connections );
     var connx = this.connections || [];
     var conn = getConnection( data.videoId, connx );
-    if( conn === undefined ) connx.push( { videoId: data.videoId, sockets: [ socket ] } );
+    if( conn === undefined ) connx.push( { videoId: data.videoId, sockets: [ this ] } );
     else {
       if( conn.sockets[socket] !== undefined )
         conn.sockets.push( socket );
