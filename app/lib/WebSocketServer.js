@@ -30,6 +30,11 @@ class WebSocketServer {
   };
 
   /*****************************************************/
+  getConnection( videoId ) {
+    this.connections.forEach( ( conn ) => {
+      if( conn.videoId === video ) return conn;
+    });
+  }
   subscribeFn( data ) {
     var conn = this.getConnection( data.videoId );
     if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
@@ -41,7 +46,7 @@ class WebSocketServer {
   }
 
   unsubscribeFn( data ) {
-    var conn = this.getConnection( data.videoId );
+    var conn = getConnection( data.videoId );
     if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
     if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
 
@@ -59,11 +64,6 @@ class WebSocketServer {
     });
   }
   /*****************************************************/
-  getConnection( videoId ) {
-    this.connections.forEach( ( conn ) => {
-      if( conn.videoId === video ) return conn;
-    });
-  }
   /*****************************************************/
 
 };
