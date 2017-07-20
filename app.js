@@ -8,14 +8,16 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-//ROUTING MODULES
-app.use('/', index);
-app.use('/socket.io', function( req, res, next ) {
-  res.header( 'Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'GET');
-  res.header('Access-Control-Allow-Credentials', true);
-  next();
+
+var server = require('http').createServer(  );
+var io = require('socket.io').listen(app);
+
+io.on('connection', function(socket) {
+  console.log( 'AAAAAH');
 });
+//ROUTING MODULES
+//app.use('/', index);
+
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -45,6 +47,10 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+app.listen( 3006, function() => {
+  console.log( "Server started on port 3006");
 });
 
 

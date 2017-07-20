@@ -1,10 +1,9 @@
 
-var io = require('socket.io');
 var server = require('http').createServer(  );
 var io = require('socket.io')(server);
 
 let init = () =>{
-
+  server.listen( 3006 );
   io.on('connection', ( socket ) => {
 
     console.log( "Connection to auction websocket feed");
@@ -26,8 +25,8 @@ let init = () =>{
       conn.sockets.splice( socket, 1 );
     });
   });
-
   server.listen( 3006 );
+
 }
 
 class SocketHandler {
