@@ -30,9 +30,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use(express.static(__dirname + '/public'));
 
 
 //ERROR HANDLER IN CASE REQUEST GETS HERE ( should end in routes if everything goes well )
