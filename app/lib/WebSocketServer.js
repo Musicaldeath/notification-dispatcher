@@ -23,7 +23,7 @@ class WebSocketServer {
     this.io.on('connection', ( socket ) => {
 
       registerEvent( socket, 'Subscribe', this.subscribeFn( this.connections ) );
-      registerEvent( socket, 'Unsubscribe', this.unsubscribeFn );
+      registerEvent( socket, 'Unsubscribe', this.unsubscribeFn( this.connections ) );
 
     });
   }
@@ -41,14 +41,17 @@ class WebSocketServer {
     };
   }
 
-  unsubscribeFn( data ) {
-    var sock = this;
-    var conn = getConnection( data.videoId, this.connections || [] );
-    if( conn === undefined ) this.emit('NoSubscriptions', "No subscriptions for this video");
-    if( conn.sockets[sock] === undefined ) this.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
-
-    conn.sockets.splice( this, 1 );
-    console.log( data );
+  unsubscribeFn( connections ) {
+    return function( data ) {
+      var sock = this;
+      var conn = getConnection( data.videoId, connections || [] );
+      if( conn === undefined ) this.emit('NoSubscriptions', "No subscriptions for this video");
+      else if( conn.sockets[sock] === undefined ) this.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
+      else {
+        conn.sockets.splice( sock, 1 );        
+      }
+      console.log( data );
+    };
   }
 
   pushMessage( videoId, msg ) {
