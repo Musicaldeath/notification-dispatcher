@@ -11,12 +11,12 @@ var app = express();
 var server = require('http').createServer( app );
 //middlewares
 app.use( function( req, res, next ) {
-  res.header("Access-Control-Allow-Origin", "*:*");
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
-require('./app/utils/websockstart').init();
-//var ioContainer = new ( require('./app/lib/WebSocketServer'))()
-//                    .init( server ) ;
+//require('./app/utils/websockstart').init();
+var ioContainer = new ( require('./app/lib/WebSocketServer'))()
+                    .init( server ) ;
 
 app.use( '/', require('./routes/index' ) );
 
