@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
 
-server.listen( 3006, function(){
+app.listen( 3006, function(){
   console.log( "Server started on port 3006");
 });
 
