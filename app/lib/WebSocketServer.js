@@ -7,7 +7,7 @@ var registerEvent = ( socket, eventName, fn ) => {
 
 var getConnection = ( videoId, arr ) => {
   arr.forEach( ( conn ) => {
-    if( conn.videoId === video ) return conn;
+    if( conn.videoId === videoId ) return conn;
   });
 };
 
@@ -48,7 +48,7 @@ class WebSocketServer {
       if( conn === undefined ) this.emit('NoSubscriptions', "No subscriptions for this video");
       else if( conn.sockets[sock] === undefined ) this.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
       else {
-        conn.sockets.splice( sock, 1 );        
+        conn.sockets.splice( sock, 1 );
       }
       console.log( data );
     };
