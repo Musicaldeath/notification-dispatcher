@@ -21,6 +21,7 @@ io.on('connection', () => {
 
 app.use( function( req, res, next ) {
   res.header("Access-Control-Allow-Origin", "*:*");
+  next();
 });
 app.use( '/', require('./routes/index' ) );
 app.use( express.static( __dirname + '/public' ));
