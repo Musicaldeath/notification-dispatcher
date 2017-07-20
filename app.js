@@ -8,14 +8,14 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-
-var server = require('http').createServer( app );
-
 app.all('/', function( req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
+var server = require('http').createServer( app );
+
+
 //ROUTING MODULES
 //app.use('/', index);
 
