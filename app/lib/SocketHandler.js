@@ -6,7 +6,7 @@ let init = () =>{
 
     console.log( "Connection to auction websocket feed");
 
-    socket.on('subscribe', ( data ) => {
+    socket.on('Subscribe', ( data ) => {
       var conn = getConnection( data.videoId );
       if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
       else {
@@ -15,7 +15,7 @@ let init = () =>{
       }
     });
 
-    socket.on('unsubscribed', ( data ) => {
+    socket.on('Unsubscribed', ( data ) => {
       var conn = getConnection( data.videoId );
       if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
       if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
