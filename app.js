@@ -19,15 +19,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 //ROUTING MODULES
 app.use('/', index);
-app.use( '/socket.io', function( req, res, next ) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
-});
 
 //ERROR HANDLER IN CASE REQUEST GETS HERE ( should end in routes if everything goes well )
 //otherwise throw error
