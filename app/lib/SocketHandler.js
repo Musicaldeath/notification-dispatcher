@@ -1,6 +1,7 @@
 
 var server = require('http').createServer(  );
 var io = require('socket.io')(server);
+io.set('origins', '*:*');
 
 let init = () =>{
   server.listen( 3006 );

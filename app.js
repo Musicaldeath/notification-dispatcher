@@ -9,8 +9,8 @@ var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
 
-var server = require('http').createServer(  );
-var io = require('socket.io').listen(app);
+var server = require('http').createServer( app );
+var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
@@ -49,7 +49,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.listen( 3006, function(){
+server.listen( 3006, function(){
   console.log( "Server started on port 3006");
 });
 
