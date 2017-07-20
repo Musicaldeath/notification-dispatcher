@@ -9,26 +9,25 @@ var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
 var server = require('http').createServer( app );
-var io = require('socket.io')( server );
+var ioContainer = require('./app/utils/websockstart').init( server );
 
-io.on('connection', ( socket ) => {
-  console.log( "CONNECTED !");
-});
-
-app.use( function( req, res, next ) {
+//middlewares
+/*app.use( function( req, res, next ) {
   res.header("Access-Control-Allow-Origin", "*:*");
   next();
-});
+});*/
 app.use( '/', require('./routes/index' ) );
+
 app.use( express.static( __dirname + '/public' ));
-
-server.listen( process.env.PORT ||3006 , () => {
-  console.log( "SERVER STARTED ON 3006");
-});
-
+app.set( 'port', process.env.PORT ||3006 );
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+server.listen( app.get('port') , () => {
+  console.log( `SERVER STARTED ON ${ app.get('port') }` );
+});
 
 module.exports = app;

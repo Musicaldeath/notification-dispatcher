@@ -1,18 +1,4 @@
-
-var server = require('http').createServer(  );
-var io = require('socket.io')(server);
-io.set('origins', '*:*');
-
-let init = () =>{
-
-  io.on('connection', ( socket ) => {
-
-    registerEvent( socket, 'Subscribe', subscribeFn );
-    registerEvent( socket, 'Unsubscribe', unsubscribeFn );
-
-  });
-};
-
+/*****************************************************/
 let subscribeFn = ( data ) => {
   var conn = getConnection( data.videoId );
   if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
@@ -21,7 +7,7 @@ let subscribeFn = ( data ) => {
       conn.sockets.push( socket );
   }
 };
-
+/*****************************************************/
 let unsubscribeFn = ( data ) => {
   var conn = getConnection( data.videoId );
   if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
@@ -30,18 +16,32 @@ let unsubscribeFn = ( data ) => {
   conn.sockets.splice( socket, 1 );
 };
 
-
 let registerEvent = ( socket, eventName, fn ) => {
   socket.on( eventName, fn );
 };
 
-class SocketHandler {
+            //******-----CLASS-----******//
+/*****************************************************/
+
+class WebSocketServer {
 
   constructor() {
       this.connections = [];
-      init();
   }
 
+  /*****************************************************/
+  init( server ) {
+
+    server.on('connection', ( socket ) => {
+
+      registerEvent( socket, 'Subscribe', subscribeFn );
+      registerEvent( socket, 'Unsubscribe', unsubscribeFn );
+
+    });
+
+    return server;
+  };
+  /*****************************************************/
   pushMessage( videoId, msg ) {
     this.connections.forEach( ( conn ) => {
       if( conn.videoId === videoId ) {
@@ -51,15 +51,15 @@ class SocketHandler {
       }
     });
   }
-
+  /*****************************************************/
   getConnection( videoId ) {
     this.connections.forEach( ( conn ) => {
       if( conn.videoId === video ) return conn;
     });
   }
-
-
+  /*****************************************************/
 
 };
+/****************    END CLASS   ***********************/
 
-module.exports = SocketHandler;
+module.exports = WebSocketServer;

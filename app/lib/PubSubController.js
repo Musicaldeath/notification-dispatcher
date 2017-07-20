@@ -3,8 +3,8 @@ const http = require('http')
 class PubSubController {
 
 
-   constructor( socketHandler ) {
-     this.socketHandler = socketHandler;
+   constructor( webSocketServer ) {
+     this.webSocketServer = webSocketServer;
    }
 
    confirmSubscription( subscribeURL ) {
@@ -14,7 +14,7 @@ class PubSubController {
    }
 
    notify( amazonSNSNotification ) {
-     this.socketHandler.pushMessage( amazonSNSNotification.videoId, amazonSNSNotification.bidAmount );
+     this.webSocketServer.pushMessage( amazonSNSNotification.videoId, amazonSNSNotification.bidAmount );
    }
 };
 
