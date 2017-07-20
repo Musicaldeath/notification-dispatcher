@@ -6,6 +6,7 @@ let subscribeFn = ( data ) => {
     if( conn.sockets[socket] !== undefined )
       conn.sockets.push( socket );
   }
+  console.log( data );
 };
 /*****************************************************/
 let unsubscribeFn = ( data ) => {
@@ -14,6 +15,7 @@ let unsubscribeFn = ( data ) => {
   if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
 
   conn.sockets.splice( socket, 1 );
+  console.log( data );
 };
 
 let registerEvent = ( socket, eventName, fn ) => {
