@@ -15,9 +15,7 @@ app.all('/', function( req, res, next) {
 });
 var server = require('http').createServer( app );
 
-var io = require('socket.io').listen(server, {
-  serveClient:true
-});
+var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
@@ -38,22 +36,6 @@ app.use(cookieParser());
 
 app.use(express.static(__dirname + '/public'));
 
-
-//ERROR HANDLER IN CASE REQUEST GETS HERE ( should end in routes if everything goes well )
-//otherwise throw error
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
 
 server.listen( 3006, function(){
   console.log( "Server started on port 3006");
