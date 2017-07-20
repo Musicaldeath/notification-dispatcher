@@ -11,7 +11,7 @@ var app = express();
 
 var server = require('http').createServer( app );
 var io = require('socket.io').listen(server);
-io.set('origins', 'localhost:*');
+io.set('origins', 'http://localhost:*');
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
 });
