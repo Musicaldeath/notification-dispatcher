@@ -22,7 +22,7 @@ app.use( function( req, res, next ) {
 app.use( '/', require('./routes/index' ) );
 app.use( express.static( __dirname + '/public' ));
 
-server.listen( 3006 , () => {
+server.listen( process.env.PORT ||3006 , () => {
   console.log( "SERVER STARTED ON 3006");
 });
 
