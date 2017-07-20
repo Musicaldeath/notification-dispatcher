@@ -7,19 +7,25 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
-var http = require('http');
-var server = http.createServer( app );
-var io = require('socket.io')(server);
 
 
-
-app.use(express.static(__dirname + '/public'));
+var server = require('http').createServer( app );
+server.listen( 3006 );
 app.use( '/', require('./routes/index'));
 
-
-io.on('connection', function( socket ) {
-  console.log( 'CONNECTED ');
+var io = require('socket.io')(server);
+io.on('connection', function(socket) {
+  console.log( 'AAAAAH');
 });
+
+io.set('transports', [            // all transports (optional if you want flashsocket)
+    'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+]);
+io.set('origins', '*:*');
 
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
@@ -31,10 +37,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
+app.use(express.static(__dirname + '/public'));
 
-app.listen( 3006, function(){
-  console.log('Server started on port 3006');
-});
+
 //ROUTING MODULES
 //app.use('/', index);
 
