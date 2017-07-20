@@ -8,24 +8,8 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-
-var server = require('http').createServer( app );
-
-var io = require('socket.io').listen(server);       // logging
-  io.set('transports', [            // all transports (optional if you want flashsocket)
-      'websocket'
-      , 'flashsocket'
-      , 'htmlfile'
-      , 'xhr-polling'
-      , 'jsonp-polling'
-  ]);
-  io.set('origins', '*:*');
-
-io.on('connection', function(socket) {
-  console.log( 'AAAAAH');
-});
 //ROUTING MODULES
-//app.use('/', index);
+app.use('/', index);
 
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
