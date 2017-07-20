@@ -36,7 +36,7 @@ class WebSocketServer {
 
   /*****************************************************/
   subscribeFn( data ) {
-    var conn = getConnection( data.videoId );
+    var conn = getConnection( data.videoId, this.connections );
     if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
     else {
       if( conn.sockets[socket] !== undefined )
@@ -46,7 +46,7 @@ class WebSocketServer {
   }
 
   unsubscribeFn( data ) {
-    var conn = getConnection( data.videoId );
+    var conn = getConnection( data.videoId, this.connections );
     if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
     if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
 
