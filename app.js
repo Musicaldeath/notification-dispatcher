@@ -30,13 +30,4 @@ app.use(express.static(__dirname + '/public'));
 //ROUTING MODULES
 //app.use('/', index);
 
-
-
-
-
-server.listen( 3006, function(){
-  console.log( "Server started on port 3006");
-});
-
-
 module.exports = app;
