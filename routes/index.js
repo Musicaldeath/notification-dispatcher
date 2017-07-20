@@ -4,14 +4,16 @@ const PubSubController = require('./../app/lib/PubSubController');
 var express = require('express');
 var app = express();
 var router = express.Router();
-var pubSubController = new PubSubController( new WebSocketServer() );
+var pubSubController = app.locals.pubSubController;
 
 router.get('/', ( req, res, next ) => {
+  console.log( req.app.locals );
   res.end('OK');
+
 });
 
 router.post('/',( req, res, next ) => {
-  
+
   var msgType = req.headers['x-amz-sns-message-type'] ;
 
   switch( msgType ) {

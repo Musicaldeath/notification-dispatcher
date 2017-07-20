@@ -15,9 +15,9 @@ app.use( function( req, res, next ) {
   next();
 });
 //require('./app/utils/websockstart').init();
-var PubSubController = require( './app/lib/pubSubController');
+var PubSubController = require( './app/lib/PubSubController');
 var WebSocketServer = require( './app/lib/WebSocketServer');
-var pubSub = new PubSubController( new WebSocketServer() )
+app.locals.pubSub = new PubSubController( new WebSocketServer() )
                     .init( server );
 
 
