@@ -5,6 +5,11 @@ let registerEvent = ( socket, eventName, fn ) => {
   socket.on( eventName, fn );
 };
 
+let getConnection = ( videoId, array ) => {
+  array.forEach( ( conn ) => {
+    if( conn.videoId === video ) return conn;
+  });
+};
 /*****************************************************/
             //******-----CLASS-----******//
 /*****************************************************/
@@ -31,7 +36,7 @@ class WebSocketServer {
 
   /*****************************************************/
   subscribeFn( data ) {
-    var conn = this.getConnection( data.videoId );
+    var conn = getConnection( data.videoId );
     if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
     else {
       if( conn.sockets[socket] !== undefined )
@@ -41,7 +46,7 @@ class WebSocketServer {
   }
 
   unsubscribeFn( data ) {
-    var conn = this.getConnection( data.videoId );
+    var conn = getConnection( data.videoId );
     if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
     if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
 
@@ -56,12 +61,6 @@ class WebSocketServer {
           sock.emit( "AuctionNotification", msg );
         });
       }
-    });
-  }
-
-  getConnection( videoId ) {
-    this.connections.forEach( ( conn ) => {
-      if( conn.videoId === video ) return conn;
     });
   }
   /*****************************************************/
