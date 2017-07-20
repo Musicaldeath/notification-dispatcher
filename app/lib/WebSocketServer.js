@@ -32,7 +32,7 @@ class WebSocketServer {
   subscribeFn( connections ) {
 
     return function( data ) {
-      this.join( data.videoId ); to test
+      this.join( data.videoId );
       /*var conn = getConnection( data.videoId, connections );
       if( conn === undefined ) connections.push( { videoId: data.videoId, sockets: [ this ] } );
       else {
@@ -45,7 +45,7 @@ class WebSocketServer {
 
   unsubscribeFn( connections ) {
     return function( data ) {
-      this.leave( data.videoId );  
+      this.leave( data.videoId );
     };
 
     /*return function( data ) {
@@ -61,7 +61,7 @@ class WebSocketServer {
   }
 
   pushMessage( videoId, msg ) {
-    this.io.in( videoId ).emit( 'AuctionUpdate', msg ); to test
+    this.io.in( videoId ).emit( 'AuctionUpdate', msg );
     /*this.connections.forEach( ( conn ) => {
       if( conn.videoId === videoId ) {
         conn.sockets.forEach( ( sock ) => {
