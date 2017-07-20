@@ -26,7 +26,7 @@ class SocketHandler {
 
       socket.on('unsubscribed', ( data ) => {
         var conn = getConnection( data.videoId );
-        if( conn === undefined ) socket.emit('NoSubscriptions' "No subscriptions for this video");
+        if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
         if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
 
         conn.sockets.splice( socket, 1 );
