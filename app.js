@@ -22,7 +22,7 @@ io.on('connection', () => {
   console.log( "CONNECTED !");
 });
 
-
+app.use( '/', require('./routes/index' ) );
 
 app.use( express.static( __dirname + '/public' ));
 

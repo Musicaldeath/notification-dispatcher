@@ -1,8 +1,12 @@
 const SocketHandler    = require('./../app/lib/SocketHandler');
 const PubSubController = require('./../app/lib/PubSubController');
 
+var express = require('express');
+var app = express();
+var router = express.Router();
 
-/*router.post('/',( req, res, next ) => {
+
+router.post('/',( req, res, next ) => {
 
   var pubSubController = new PubSubController( socketHandler );
   var msgType = req.headers['x-amz-sns-message-type'] ;
@@ -16,6 +20,6 @@ const PubSubController = require('./../app/lib/PubSubController');
 
   console.log( req );
   res.end();
-});*/
+});
 
-//module.exports = router;
+module.exports = router;
