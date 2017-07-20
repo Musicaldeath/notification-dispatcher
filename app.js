@@ -9,8 +9,26 @@ var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
 
+
 var server = require('http').createServer( app );
-app.use( '/', require('./routes/index'));
+var io = require('socket.io')( server );
+
+
+server.listen( 3006 , () => {
+  console.log( "SERVER STARTED ON 3006");
+});
+
+io.on('connection', () => {
+  console.log( "CONNECTED !");
+});
+
+
+
+app.use( express.static( __dirname + '/public' ));
+
+
+/*var server = require('http').createServer( app );
+app.use( '/', require('./routes/index'));*/
 
 /*var io = require('socket.io')(server);
 io.on('connection', function(socket) {
@@ -27,7 +45,7 @@ io.set('transports', [            // all transports (optional if you want flashs
 io.set('origins', '*:*');*/
 
 //APP BASIC CONFIG
-app.engine('html', require('ejs').renderFile);
+/*app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(favicon());
 app.use(logger('dev'));
@@ -39,7 +57,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 server.listen( 3006, () => {
   console.log( "SERVER STARTED ON 3006");
-} );
+} );*/
 
 
 //ROUTING MODULES
