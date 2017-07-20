@@ -12,4 +12,4 @@ class AmazonSNSNotification {
   }
 };
 
-modules.export = AmazonSNSNotification;
+module.exports = AmazonSNSNotification;

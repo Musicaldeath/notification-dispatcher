@@ -18,4 +18,4 @@ class PubSubController {
    }
 };
 
-modules.export = PubSubController;
+module.exports = PubSubController;

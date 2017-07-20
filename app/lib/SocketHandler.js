@@ -56,4 +56,4 @@ class SocketHandler {
 
 };
 
-modules.export = SocketHandler;
+module.exports = SocketHandler;
