@@ -2,9 +2,9 @@ const SocketHandler    = require('./../app/lib/SocketHandler');
 const PubSubController = require('./../app/lib/PubSubController');
 
 var express = require('express');
-/*var app     = express();
+//var app     = express();
 var router  = express.Router();
-var socketHandler = new SocketHandler();*/
+/*var socketHandler = new SocketHandler();*/
 
 var app = express();
 
@@ -25,7 +25,7 @@ io.on('connection', function(socket) {
   console.log( 'AAAAAH');
 });
 
-router.get('/', ( req, res, next ) => {
+router.get('/', ( req, res, next ) =>  {
   res.end();
 });
 
