@@ -14,10 +14,10 @@ var io = require('socket.io')(server);
 server.listen( 3006, function(){
   console.log('Server started on port 3006');
 });
+app.use( '/', require('./routes/index'));
 
 app.use(express.static(__dirname + '/public'));
 
-app.use( '/', require('./routes/index'));
 
 io.on('connection', function( socket ) {
   console.log( 'CONNECTED ');
