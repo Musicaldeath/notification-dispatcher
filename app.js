@@ -11,6 +11,11 @@ var app = express();
 
 var server = require('http').createServer( app );
 
+app.all('/', function( req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 //ROUTING MODULES
 //app.use('/', index);
 
@@ -30,7 +35,7 @@ app.use(express.static(__dirname + '/public'));
 var io = require('socket.io').listen(server, {
   serveClient:false
 });
-io.set('origins', '74.58.196.237:*');
+
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
 });
