@@ -13,7 +13,7 @@ router.post('/',( req, res, next ) => {
 
   switch( msgType ) {
     case 'SubscriptionConfirmation' :  pubSubController.confirmSubscription( req.body.SubscribeURL ); break;
-    case 'Notification' : pubSubController.notify( new AmazonSNSNotification( req ) ) break;
+    case 'Notification' : pubSubController.notify( new AmazonSNSNotification( req ) ); break;
     default: res.status( 400 ).send( { err: 'Unsupported method' } );
   }
 
