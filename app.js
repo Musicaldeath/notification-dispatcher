@@ -9,7 +9,7 @@ var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
 var server = require('http').createServer( app );
-var ioContainer = require('./app/utils/websockstart').init( server );
+var ioContainer = require('./app/utils/WebSocketServer').init( server );
 
 //middlewares
 /*app.use( function( req, res, next ) {
