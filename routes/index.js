@@ -5,22 +5,6 @@ var express = require('express');
 //var app     = express();
 var router  = express.Router();
 /*var socketHandler = new SocketHandler();*/
-
-var app = express();
-
-
-var server = require('http').createServer( app );
-
-var io = require('socket.io').listen(server);       // logging
-  io.set('transports', [            // all transports (optional if you want flashsocket)
-      'websocket'
-      , 'flashsocket'
-      , 'htmlfile'
-      , 'xhr-polling'
-      , 'jsonp-polling'
-  ]);
-  io.set('origins', '*:*');
-
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
 });

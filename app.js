@@ -10,9 +10,22 @@ var app = express();
 
 
 var server = require('http').createServer( app );
-
 app.use( '/', require('./routes/index'));
 
+var io = require('socket.io')(server);
+io.on('connection', function(socket) {
+  console.log( 'AAAAAH');
+});
+
+io.set('transports', [            // all transports (optional if you want flashsocket)
+    'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+]);
+io.set('origins', '*:*');
+server.listen( 3006 );
 
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
