@@ -15,7 +15,13 @@ app.all('/', function( req, res, next) {
 });
 var server = require('http').createServer( app );
 
+var io = require('socket.io').listen(server, {
+  serveClient:true
+});
 
+io.on('connection', function(socket) {
+  console.log( 'AAAAAH');
+});
 //ROUTING MODULES
 //app.use('/', index);
 
@@ -32,13 +38,7 @@ app.use(cookieParser());
 
 app.use(express.static(__dirname + '/public'));
 
-var io = require('socket.io').listen(server, {
-  serveClient:false
-});
 
-io.on('connection', function(socket) {
-  console.log( 'AAAAAH');
-});
 //ERROR HANDLER IN CASE REQUEST GETS HERE ( should end in routes if everything goes well )
 //otherwise throw error
 app.use(function(req, res, next) {
