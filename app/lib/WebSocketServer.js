@@ -1,7 +1,7 @@
 var socketIo = require('socket.io');
 
 /*****************************************************/
-let subscribeFn = ( data ) => {
+let subscribeConnFn = ( data, conn ) => {
   var conn = getConnection( data.videoId );
   if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
   else {
@@ -11,7 +11,7 @@ let subscribeFn = ( data ) => {
   console.log( data );
 };
 /*****************************************************/
-let unsubscribeFn = ( data ) => {
+let unsubscribeConnFn = ( data, conn ) => {
   var conn = getConnection( data.videoId );
   if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
   if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
@@ -44,13 +44,23 @@ class WebSocketServer {
     this.io = socketIo( server );
     this.io.on('connection', ( socket ) => {
 
-      registerEvent( socket, 'Subscribe', subscribeFn );
-      registerEvent( socket, 'Unsubscribe', unsubscribeFn );
+      registerEvent( socket, 'Subscribe', subscribeConn );
+      registerEvent( socket, 'Unsubscribe', unsubscribeConn );
 
     });
 
     return server;
-  };
+  }
+
+  subscribeConn( data ) {
+    var conn = getConnection( data.videoId );
+    subscibeConnFn( data, conn );
+  }
+
+  unsubscribeConn( data ) {
+    var conn = getConnection( data.videoId );
+    unsubscribeConnFn( data, conn );
+  }
   /*****************************************************/
   pushMessage( videoId, msg ) {
     this.connections.forEach( ( conn ) => {
