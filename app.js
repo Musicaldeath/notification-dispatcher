@@ -11,12 +11,9 @@ var http = require('http');
 var server = http.createServer( app );
 var io = require('socket.io')(server);
 
-server.listen( 3006, function(){
-  console.log('Server started on port 3006');
-});
+
 
 app.use( '/', require('./routes/index'));
-app.use('/socket.io', express.static(__dirname + '/node_modules/socket.io-client/dist/'));
 app.use(express.static(__dirname + '/public'));
 
 
@@ -35,7 +32,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 
-
+app.listen( 3006, function(){
+  console.log('Server started on port 3006');
+});
 //ROUTING MODULES
 //app.use('/', index);
 
