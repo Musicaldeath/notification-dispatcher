@@ -10,7 +10,6 @@ var app = express();
 
 
 var server = require('http').createServer( app );
-server.listen( 3006 );
 app.use( '/', require('./routes/index'));
 
 var io = require('socket.io')(server);
@@ -38,6 +37,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 app.use(express.static(__dirname + '/public'));
+server.listen( 3006, () => {
+  console.log( "SERVER STARTED ON 3006");
+} );
 
 
 //ROUTING MODULES
