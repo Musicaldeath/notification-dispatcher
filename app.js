@@ -21,6 +21,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
+
+app.get('/', (req, res, next ) {
+  console.log("OK");
+});
+
 app.use(express.static(__dirname + '/public'));
 
 
