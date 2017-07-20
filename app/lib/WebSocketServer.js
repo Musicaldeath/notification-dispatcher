@@ -27,7 +27,7 @@ class WebSocketServer {
     });
 
     return server;
-  };
+  }
 
   /*****************************************************/
   getConnection( videoId ) {
