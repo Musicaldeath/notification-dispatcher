@@ -8,7 +8,6 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-app.use(express.static(__dirname + '/public'));
 
 var server = require('http').createServer( app );
 app.all('/', function( req, res, next) {
@@ -16,15 +15,6 @@ app.all('/', function( req, res, next) {
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
-
-var io = require('socket.io').listen(server);       // logging
-
-
-io.on('connection', function(socket) {
-  console.log( 'AAAAAH');
-});
-//ROUTING MODULES
-//app.use('/', index);
 
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
@@ -35,6 +25,21 @@ app.use( contentTypeOverride.overrideContentType() );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.get('/', function(req, res, next) {
+  res.end();
+});
+app.use(express.static(__dirname + '/public'));
+
+
+
+var io = require('socket.io').listen(server);       // logging
+
+
+io.on('connection', function(socket) {
+  console.log( 'AAAAAH');
+});
+//ROUTING MODULES
+//app.use('/', index);
 
 
 
