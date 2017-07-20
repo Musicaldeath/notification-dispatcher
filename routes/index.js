@@ -6,6 +6,10 @@ var app = express();
 var router = express.Router();
 
 
+router.get('/', ( req, res, next ) => {
+  res.end('OK');
+});
+
 router.post('/',( req, res, next ) => {
 
   var pubSubController = new PubSubController( socketHandler );
