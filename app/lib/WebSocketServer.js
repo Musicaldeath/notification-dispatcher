@@ -36,7 +36,7 @@ class WebSocketServer {
     });
   }
   subscribeFn( data ) {
-    var conn = this.getConnection( data.videoId );
+    var conn = getConnection( data.videoId );
     if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
     else {
       if( conn.sockets[socket] !== undefined )
