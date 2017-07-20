@@ -8,6 +8,7 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
+
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');

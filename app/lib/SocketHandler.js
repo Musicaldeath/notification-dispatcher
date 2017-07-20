@@ -1,7 +1,11 @@
-var server = require('http').createServer();
-var io = require('socket.io')(server);
 
-let init = () =>{
+var io = require('socket.io');
+var server;
+
+let init = ( app ) =>{
+  server = require('http').createServer( app ).listen( 3006 );
+  io = io.listen( server );
+
   io.on('connection', ( socket ) => {
 
     console.log( "Connection to auction websocket feed");
@@ -23,15 +27,13 @@ let init = () =>{
       conn.sockets.splice( socket, 1 );
     });
   });
-
-  server.listen( 3006 );
 }
 
 class SocketHandler {
 
-  constructor() {
+  constructor( app ) {
       this.connections = [];
-      init();
+      init( app );
   }
 
   pushMessage( videoId, msg ) {
