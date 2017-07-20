@@ -23,8 +23,8 @@ class WebSocketServer {
     this.io = socketIo( server );
     this.io.on('connection', ( socket ) => {
 
-      registerEvent( socket, 'Subscribe', subscribeFn );
-      registerEvent( socket, 'Unsubscribe', unsubscribeFn );
+      registerEvent( socket, 'Subscribe', this.subscribeFn );
+      registerEvent( socket, 'Unsubscribe', this.unsubscribeFn );
 
     });
 
