@@ -10,7 +10,9 @@ var app = express();
 
 
 var server = require('http').createServer( app );
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {
+  serveClient:false
+});
 io.set('origins', 'http://localhost:*');
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
