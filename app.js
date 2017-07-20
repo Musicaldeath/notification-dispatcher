@@ -17,6 +17,18 @@ var server = require('http').createServer( app );
 
 var io = require('socket.io').listen(server);
 
+io.configure('production', function(){
+    io.set('log level', 1);           // logging
+    io.set('transports', [            // all transports (optional if you want flashsocket)
+        'websocket'
+        , 'flashsocket'
+        , 'htmlfile'
+        , 'xhr-polling'
+        , 'jsonp-polling'
+    ]);
+    io.set('origins', '*:*');
+});
+
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
 });
