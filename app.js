@@ -9,14 +9,15 @@ var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
 var server = require('http').createServer( app );
-var ioContainer = new ( require('./app/lib/WebSocketServer'))()
-                    .init( server ) ;
-
 //middlewares
 app.use( function( req, res, next ) {
   res.header("Access-Control-Allow-Origin", "*:*");
   next();
 });
+
+var ioContainer = new ( require('./app/lib/WebSocketServer'))()
+                    .init( server ) ;
+
 app.use( '/', require('./routes/index' ) );
 
 app.use( express.static( __dirname + '/public' ));
