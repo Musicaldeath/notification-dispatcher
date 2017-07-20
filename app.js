@@ -11,7 +11,9 @@ var app = express();
 //ROUTING MODULES
 app.use('/', index);
 app.use('/socket.io', function( req, res, next ) {
-  res.setHeader( 'Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header( 'Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Methods', 'GET');
+  res.header('Access-Control-Allow-Credentials', true);
   next();
 });
 //APP BASIC CONFIG
