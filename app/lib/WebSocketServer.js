@@ -1,3 +1,5 @@
+var socketIo = require('socket.io');
+
 /*****************************************************/
 let subscribeFn = ( data ) => {
   var conn = getConnection( data.videoId );
@@ -29,12 +31,13 @@ class WebSocketServer {
 
   constructor() {
       this.connections = [];
+      this.io = {};
   }
 
   /*****************************************************/
   init( server ) {
-
-    server.on('connection', ( socket ) => {
+    this.io = socketIo( server );
+    this.io.on('connection', ( socket ) => {
 
       registerEvent( socket, 'Subscribe', subscribeFn );
       registerEvent( socket, 'Unsubscribe', unsubscribeFn );

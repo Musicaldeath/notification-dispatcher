@@ -14,14 +14,14 @@ app.use( function( req, res, next ) {
   res.header("Access-Control-Allow-Origin", "*:*");
   next();
 });
-
-var ioContainer = new ( require('./app/lib/WebSocketServer'))()
-                    .init( server ) ;
+require('./app/utils/websockstart').init();
+//var ioContainer = new ( require('./app/lib/WebSocketServer'))()
+//                    .init( server ) ;
 
 app.use( '/', require('./routes/index' ) );
 
 app.use( express.static( __dirname + '/public' ));
-app.set( 'port', process.env.PORT ||3006 );
+app.set( 'port', process.env.PORT || 3006 );
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
