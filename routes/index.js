@@ -4,22 +4,7 @@ const PubSubController = require('./../app/lib/PubSubController');
 var express = require('express');
 var router  = express.Router();
 
-var app     = express();
-var server = require('http').createServer( app );
-var io = require('socket.io')(server);
-io.on('connection', function(socket) {
-  console.log( 'AAAAAH');
-});
 
-io.set('transports', [            // all transports (optional if you want flashsocket)
-    'websocket'
-    , 'flashsocket'
-    , 'htmlfile'
-    , 'xhr-polling'
-    , 'jsonp-polling'
-]);
-io.set('origins', '*:*');
-server.listen( 3006 );
 /*var socketHandler = new SocketHandler();*/
 router.get('/', ( req, res, next ) =>  {
   res.end();
