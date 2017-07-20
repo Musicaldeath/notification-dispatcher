@@ -13,7 +13,7 @@ router.get('/', ( req, res, next ) => {
 });
 
 router.post('/',( req, res, next ) => {
-
+  console.log( req );
   var msgType = req.headers['x-amz-sns-message-type'] ;
 
   switch( msgType ) {
