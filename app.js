@@ -10,11 +10,7 @@ var app = express();
 
 
 var server = require('http').createServer( app );
-app.all('/', function( req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
+
 var io = require('socket.io').listen(server);       // logging
   io.set('transports', [            // all transports (optional if you want flashsocket)
       'websocket'
