@@ -8,7 +8,12 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-
+//ROUTING MODULES
+app.use('/', index);
+app.use('/socket.io', function( req, res, next ) {
+  res.setHeader( 'Access-Control-Allow-Origin', 'http://localhost:3000');
+  next();
+});
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -22,8 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//ROUTING MODULES
-app.use('/', index);
+
 
 //ERROR HANDLER IN CASE REQUEST GETS HERE ( should end in routes if everything goes well )
 //otherwise throw error

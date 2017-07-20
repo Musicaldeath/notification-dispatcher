@@ -1,10 +1,9 @@
 
 var io = require('socket.io');
-var server;
+var server = require('http').createServer(  );
+var io = require('socket.io')(server);
 
-let init = ( app ) =>{
-  server = require('http').createServer( app ).listen( 3006 );
-  io = io.listen( server );
+let init = () =>{
 
   io.on('connection', ( socket ) => {
 
@@ -27,13 +26,15 @@ let init = ( app ) =>{
       conn.sockets.splice( socket, 1 );
     });
   });
+
+  server.listen( 3006 );
 }
 
 class SocketHandler {
 
-  constructor( app ) {
+  constructor() {
       this.connections = [];
-      init( app );
+      init();
   }
 
   pushMessage( videoId, msg ) {
