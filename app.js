@@ -8,6 +8,7 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
+app.use(express.static(__dirname + '/public'));
 
 var server = require('http').createServer( app );
 app.all('/', function( req, res, next) {
@@ -17,14 +18,7 @@ app.all('/', function( req, res, next) {
 });
 
 var io = require('socket.io').listen(server);       // logging
-  io.set('transports', [            // all transports (optional if you want flashsocket)
-      'websocket'
-      , 'flashsocket'
-      , 'htmlfile'
-      , 'xhr-polling'
-      , 'jsonp-polling'
-  ]);
-  io.set('origins', '*:*');
+
 
 io.on('connection', function(socket) {
   console.log( 'AAAAAH');
@@ -43,7 +37,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 
-app.use(express.static(__dirname + '/public'));
+
 
 
 server.listen( 3006, function(){
