@@ -30,11 +30,6 @@ class WebSocketServer {
   }
 
   /*****************************************************/
-  getConnection( videoId ) {
-    this.connections.forEach( ( conn ) => {
-      if( conn.videoId === video ) return conn;
-    });
-  }
   subscribeFn( data ) {
     var conn = this.getConnection( data.videoId );
     if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
@@ -61,6 +56,12 @@ class WebSocketServer {
           sock.emit( "AuctionNotification", msg );
         });
       }
+    });
+  }
+
+  getConnection( videoId ) {
+    this.connections.forEach( ( conn ) => {
+      if( conn.videoId === video ) return conn;
     });
   }
   /*****************************************************/
