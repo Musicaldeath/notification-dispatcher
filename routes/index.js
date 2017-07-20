@@ -25,7 +25,7 @@ io.on('connection', function(socket) {
   console.log( 'AAAAAH');
 });
 
-router.get('/', ( req, res, next ) {
+router.get('/', ( req, res, next ) => {
   res.end();
 });
 
