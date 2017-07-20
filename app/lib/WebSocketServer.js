@@ -2,7 +2,6 @@ var socketIo = require('socket.io');
 
 /*****************************************************/
 let subscribeConnFn = ( data, conn ) => {
-  var conn = getConnection( data.videoId );
   if( conn === undefined ) this.connections.push( { videoId: data.videoId, sockets: [ socket ] } );
   else {
     if( conn.sockets[socket] !== undefined )
@@ -12,7 +11,6 @@ let subscribeConnFn = ( data, conn ) => {
 };
 /*****************************************************/
 let unsubscribeConnFn = ( data, conn ) => {
-  var conn = getConnection( data.videoId );
   if( conn === undefined ) socket.emit('NoSubscriptions', "No subscriptions for this video");
   if( conn.sockets[sock] === undefined ) socket.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
 
