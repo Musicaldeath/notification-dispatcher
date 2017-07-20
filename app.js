@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 
-app.get('/', (req, res, next ) {
+app.get('/', (req, res, next ) => {
   console.log("OK");
 });
 
