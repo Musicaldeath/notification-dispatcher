@@ -13,8 +13,8 @@ var io = require('socket.io')(server);
 
 
 
-app.use( '/', require('./routes/index'));
 app.use(express.static(__dirname + '/public'));
+app.use( '/', require('./routes/index'));
 
 
 io.on('connection', function( socket ) {
