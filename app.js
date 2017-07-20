@@ -11,7 +11,7 @@ var app = express();
 var server = require('http').createServer( app );
 var io = require('socket.io')( server );
 
-io.on('connection', () => {
+io.on('connection', ( socket ) => {
   console.log( "CONNECTED !");
 });
 
@@ -25,5 +25,10 @@ app.use( express.static( __dirname + '/public' ));
 server.listen( 3006 , () => {
   console.log( "SERVER STARTED ON 3006");
 });
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 module.exports = app;
