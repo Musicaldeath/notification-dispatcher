@@ -17,9 +17,9 @@ router.post('/',( req, res, next ) => {
     default: res.status( 400 ).send( { err: 'Unsupported method' } );
   }
 
-
   console.log( req );
   res.end();
+
 });
 
 module.exports = router;
