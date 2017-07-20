@@ -5,6 +5,7 @@ var registerEvent = ( socket, eventName, fn ) => {
   socket.on( eventName, fn );
 };
 
+//ne semble pas bien fonctionner... ne retourne pas l'objet
 var getConnection = ( videoId, arr ) => {
   arr.forEach( ( conn ) => {
     if( conn.videoId === videoId ) return conn;
@@ -31,37 +32,43 @@ class WebSocketServer {
   subscribeFn( connections ) {
 
     return function( data ) {
-      var conn = getConnection( data.videoId, connections || [] );
+      this.join( data.videoId ); to test
+      /*var conn = getConnection( data.videoId, connections );
       if( conn === undefined ) connections.push( { videoId: data.videoId, sockets: [ this ] } );
       else {
         if( conn.sockets[this] === undefined )
           conn.sockets.push( this );
       }
-      console.log( connections, '  ', data );
+      console.log( connections );*/
     };
   }
 
   unsubscribeFn( connections ) {
     return function( data ) {
+      this.leave( data.videoId );  
+    };
+
+    /*return function( data ) {
       var sock = this;
-      var conn = getConnection( data.videoId, connections || [] );
+      var conn = getConnection( data.videoId, connections );
       if( conn === undefined ) this.emit('NoSubscriptions', "No subscriptions for this video");
       else if( conn.sockets[sock] === undefined ) this.emit( 'UserNotRegistered',  'User socket not subscribed this notification feed');
       else {
         conn.sockets.splice( sock, 1 );
       }
-      console.log( connections, '  ', data  );
-    };
+      console.log( connections );
+    };*/
   }
 
   pushMessage( videoId, msg ) {
-    this.connections.forEach( ( conn ) => {
+    this.io.in( videoId ).emit( 'AuctionUpdate', msg ); to test
+    /*this.connections.forEach( ( conn ) => {
       if( conn.videoId === videoId ) {
         conn.sockets.forEach( ( sock ) => {
           sock.emit( "AuctionNotification", msg );
         });
       }
-    });
+    });*/
   }
 
 };
