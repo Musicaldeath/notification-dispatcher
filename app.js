@@ -8,8 +8,29 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
+
+var server = require('http').createServer( app );
+app.all('/', function( req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
+var io = require('socket.io').listen(server);       // logging
+  io.set('transports', [            // all transports (optional if you want flashsocket)
+      'websocket'
+      , 'flashsocket'
+      , 'htmlfile'
+      , 'xhr-polling'
+      , 'jsonp-polling'
+  ]);
+  io.set('origins', '*:*');
+
+io.on('connection', function(socket) {
+  console.log( 'AAAAAH');
+});
 //ROUTING MODULES
-app.use('/', index);
+//app.use('/', index);
 
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
@@ -25,7 +46,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
 
-app.listen( 3006, function(){
+server.listen( 3006, function(){
   console.log( "Server started on port 3006");
 });
 
