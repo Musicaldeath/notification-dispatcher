@@ -7,7 +7,7 @@ var router  = express.Router();
 var socketHandler = new SocketHandler( app );
 
 router.post('/',( req, res, next ) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://74.58.196.237')
+  res.setHeader('Access-Control-Allow-Origin', '*');
   var pubSubController = new PubSubController( socketHandler );
   var msgType = req.headers['x-amz-sns-message-type'] ;
 
