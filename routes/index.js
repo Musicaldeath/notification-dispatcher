@@ -5,10 +5,6 @@ var express = require('express');
 //var app     = express();
 var router  = express.Router();
 /*var socketHandler = new SocketHandler();*/
-io.on('connection', function(socket) {
-  console.log( 'AAAAAH');
-});
-
 router.get('/', ( req, res, next ) =>  {
   res.end();
 });
