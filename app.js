@@ -11,21 +11,18 @@ var app = express();
 
 var server = require('http').createServer( app );
 
+app.use( '/', require('./routes/index'));
+
+
 //APP BASIC CONFIG
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(favicon());
 app.use(logger('dev'));
-//app.use( contentTypeOverride.overrideContentType() );
+app.use( contentTypeOverride.overrideContentType() );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-
-
-app.get('/', (req, res, next ) => {
-  console.log("OK");
-  res.end();
-});
 
 app.use(express.static(__dirname + '/public'));
 
