@@ -49,7 +49,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.listen( 3006, function() => {
+app.listen( 3006, function(){
   console.log( "Server started on port 3006");
 });
 
