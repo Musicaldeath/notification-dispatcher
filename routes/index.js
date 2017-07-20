@@ -4,7 +4,6 @@ const PubSubController = require('./../app/lib/PubSubController');
 var express = require('express');
 var app = express();
 var router = express.Router();
-var pubSubController = app.locals.pubSubController;
 
 router.get('/', ( req, res, next ) => {
   console.log( req.app.locals );
@@ -17,8 +16,8 @@ router.post('/',( req, res, next ) => {
   var msgType = req.headers['x-amz-sns-message-type'] ;
 
   switch( msgType ) {
-    case 'SubscriptionConfirmation' :  pubSubController.confirmSubscription( req.body.SubscribeURL ); break;
-    case 'Notification' : pubSubController.notify( new AmazonSNSNotification( req ) ); break;
+    case 'SubscriptionConfirmation' :  req.app.locals.pubSubController.confirmSubscription( req.body.SubscribeURL ); break;
+    case 'Notification' : req.app.locals.pubSubController.notify( new AmazonSNSNotification( req ) ); break;
     default: res.status( 400 ).send( { err: 'Unsupported method' } );
   }
 
