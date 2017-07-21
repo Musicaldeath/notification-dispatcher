@@ -12,7 +12,9 @@ var app = express();
 var server = require('http').createServer( app );
 
 
-app.locals.publisher = new PubSubController( new WebSocketServer() ).init( server );
+var publisher =  new PubSubController( new WebSocketServer() ).init( server );
+app.locals.pu = publisher;
+console.log( app.locals );
 
 //middlewares
 app.use( function( req, res, next ) {
