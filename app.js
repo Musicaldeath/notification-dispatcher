@@ -13,7 +13,7 @@ var server = require('http').createServer( app );
 
 
 var publisher =  new PubSubController( new WebSocketServer() ).init( server );
-app.locals.pu = publisher;
+app.locals.publisher = publisher;
 console.log( app.locals );
 
 //middlewares
