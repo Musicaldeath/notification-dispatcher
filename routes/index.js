@@ -9,6 +9,11 @@ router.get('/', ( req, res, next ) => {
 });
 
 router.post('/',( req, res, next ) => {
+
+  console.log( "REQ : ", req );
+  console.log( "APP : ", app );
+  console.log( "LOCALS : ", req.app.locals );
+
   const pubSubController = req.app.get('Publisher');
   var msgType = req.headers['x-amz-sns-message-type'] ;
 
