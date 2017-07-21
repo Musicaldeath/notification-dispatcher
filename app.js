@@ -8,17 +8,18 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-var server = require('http').createServer( app );
+//var server = require('http').createServer( app );
 //middlewares
 app.use( function( req, res, next ) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
+
 //require('./app/utils/websockstart').init();
-var PubSubController = require( './app/lib/PubSubController');
+/*var PubSubController = require( './app/lib/PubSubController');
 var WebSocketServer = require( './app/lib/WebSocketServer');
 app.locals.pubSub = new PubSubController( new WebSocketServer() )
-                    .init( server );
+                    .init( server );*/
 
 
 app.use( '/', require('./routes/index' ) );
@@ -31,8 +32,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-server.listen( app.get('port') , () => {
+app.listen( app.get('port') , () => {
   console.log( `SERVER STARTED ON ${ app.get('port') }` );
 });
+
+
 
 module.exports = app;
