@@ -7,7 +7,7 @@ router.get('/', ( req, res, next ) => {
 });
 
 router.post('/',( req, res, next ) => {
-  const pubSubController = eq.app.get('Publisher');
+  const pubSubController = req.app.get('Publisher');
   var msgType = req.headers['x-amz-sns-message-type'] ;
 
   switch( msgType ) {
