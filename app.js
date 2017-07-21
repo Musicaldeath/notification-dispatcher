@@ -1,3 +1,5 @@
+const WebSocketServer    = require('./app/lib/WebSocketServer');
+const PubSubController = require('./app/lib/PubSubController');
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -8,16 +10,16 @@ var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
 
-//var server = require('http').createServer( app );
+var server = require('http').createServer( app );
 //middlewares
+app.use( function( req, res, next ) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 
-//require('./app/utils/websockstart').init();
-/*var PubSubController = require( './app/lib/PubSubController');
-var WebSocketServer = require( './app/lib/WebSocketServer');
-app.locals.pubSub = new PubSubController( new WebSocketServer() )
-                    .init( server );*/
-
+var publisher =  new PubSubController( new WebSocketServer() ).init( server );
+app.set( 'Publisher', publisher );
 
 app.use( '/', require('./routes/index' ) );
 
@@ -29,10 +31,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.listen( app.get('port') , () => {
+server.listen( app.get('port') , () => {
   console.log( `SERVER STARTED ON ${ app.get('port') }` );
 });
-
-
 
 module.exports = app;
