@@ -3,6 +3,8 @@ var app = express();
 var router = express.Router();
 
 router.get('/', ( req, res, next ) => {
+  console.log( app );
+  console.log( req.app );
   res.end('OK');
 });
 

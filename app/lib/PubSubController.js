@@ -9,6 +9,7 @@ class PubSubController {
 
    init( server ) {
      this.webSocketServer.init( server );
+     return this;
    }
 
    confirmSubscription( subscribeURL ) {

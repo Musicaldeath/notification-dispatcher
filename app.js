@@ -9,19 +9,18 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var contentTypeOverride = require('./utils/contentTypeOverride');
 var app = express();
-
 var server = require('http').createServer( app );
+
+
+app.locals.publisher = new PubSubController( new WebSocketServer() ).init( server );
+
 //middlewares
 app.use( function( req, res, next ) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
-
-var publisher =  new PubSubController( new WebSocketServer() ).init( server );
-app.set( 'Publisher', publisher );
-
-app.use( '/', require('./routes/index' ) );
+app.use( '/', require( './routes/index' ));
 
 app.use( express.static( __dirname + '/public' ));
 app.set( 'port', process.env.PORT || 3006 );
