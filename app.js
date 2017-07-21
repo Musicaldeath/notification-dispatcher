@@ -12,7 +12,8 @@ var app = express();
 var server = require('http').createServer( app );
 
 
-var publisher =  new PubSubController( new WebSocketServer() ).init( server );
+var publisher =  new PubSubController( new WebSocketServer() )
+publisher.init( server );
 app.locals.publisher = publisher;
 console.log( app.locals );
 

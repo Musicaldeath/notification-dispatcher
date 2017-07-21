@@ -18,7 +18,7 @@ router.post('/',( req, res, next ) => {
   var msgType = req.headers['x-amz-sns-message-type'] ;
 
   switch( msgType ) {
-    case 'SubscriptionConfirmation' :  req.app.locals.publisher.pubSubController.confirmSubscription( req.body.SubscribeURL ); break;
+    case 'SubscriptionConfirmation' :  pubSubController.confirmSubscription( req.body.SubscribeURL ); break;
     case 'Notification' : req.app.locals.publisher.notify( new AmazonSNSNotification( req ) ); break;
     default: res.status( 400 ).send( { err: 'Unsupported method' } );
   }
