@@ -30,8 +30,6 @@ class WebSocketServer {
   }
 
   subscribeFn( connections ) {
-
-    console.log( 'SUB DATA : ', data);
     return function( data ) {
       this.join( data.videoId );
       /*var conn = getConnection( data.videoId, connections );
@@ -45,7 +43,6 @@ class WebSocketServer {
   }
 
   unsubscribeFn( connections ) {
-    console.log( 'UNSUB DATA : ', data);
     return function( data ) {
       this.leave( data.videoId );
     };
