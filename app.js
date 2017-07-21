@@ -10,10 +10,7 @@ var app = express();
 
 //var server = require('http').createServer( app );
 //middlewares
-app.use( function( req, res, next ) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+
 
 //require('./app/utils/websockstart').init();
 /*var PubSubController = require( './app/lib/PubSubController');

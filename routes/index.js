@@ -8,6 +8,10 @@ var socketServer = require('http').createServer( app );
 var pubSubController = new PubSubController( new WebSocketServer() )
                               .init( socketServer )
 
+app.use( function( req, res, next ) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 router.get('/', ( req, res, next ) => {
   console.log( req.app.locals );
